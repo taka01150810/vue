@@ -5,8 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </head>
 <body>
+    <div id="app">
+        <!-- {{ }} はマスタッシュ(口ひげ)構文 と呼ばれる -->
+        {{ message }}
+    </div>
     
+    <script>
+    let app = new Vue({ //Vueクラスのインスタンス化(実体) = new
+        el: '#app', //仮想DOMの範囲
+        data(){ //仮想DOMで表示する値
+            return {
+                //オブジェクトは key:value という書き方
+                message: 'Vueテスト'
+            }
+        }
+    })
+    </script>
 </body>
 </html>
