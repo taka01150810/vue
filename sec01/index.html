@@ -8,6 +8,9 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </head>
 <body>
+    <!-- リアルDOM JSが紐付いているかわからない -->
+    <a id="google_link">googleへのリンクです</a>
+
     <div id="app">
         <!-- {{ }} はマスタッシュ(口ひげ)構文 と呼ばれる -->
         {{ message }}
@@ -27,6 +30,10 @@
     const html = document.querySelector('html');
     console.dir(html);//結果 html
     console.dir(app);//結果 Vue
+
+    //直接DOM操作 HTML側(idなど)が変わればJSも変更必要
+    const googleLink = document.getElementById('google_link');
+    googleLink.href="https://www.google.com/";
 
     </script>
 </body>
