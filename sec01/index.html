@@ -20,16 +20,32 @@
     <a id="google_link">googleへのリンクです</a>
 
     <div id="app">
-        <div v-show="isDisplay">trueです</div><!-- trueの時表示 -->
-        <div v-show="!isDisplay">falseです</div><!-- falseの時表示 -->
+        <!-- one of them のイメージ -->
+        <!-- 配列(value) -->
+        <li v-for="member in members">
+            {{ member }}
+        </li>
 
-        <div v-if="isDisplay">ifで表示</div><!-- trueの時表示 -->
+        <!-- 配列(value, index) -->
+        <li v-for="(member, index) in members">
+            {{ index }} : {{ member }}
+        </li>
 
-        <div v-if="signal == 'red'">赤</div>
-        <div v-else-if="signal == 'yellow'">黄</div>
-        <div v-else-if="signal == 'blue'">青</div>
-        <div v-else>赤、青、黄ではありません</div>
-        <!-- 結果 青 -->
+        <!-- オブジェクト(value) -->
+        <li v-for="(value) in books">
+            {{ value }}
+        </li>
+
+        <!-- オブジェクト(value, key) -->
+        <li v-for="(value, key) in books">
+            {{ key }} : {{ value }}
+        </li>
+
+        <!-- オブジェクト(value, key, index) -->
+        <li v-for="(value, key, index) in books">
+            {{ index }} : {{ key }} : {{ value }}
+        </li>
+        
 
     </div>
     
@@ -38,8 +54,12 @@
         el: '#app', //仮想DOMの範囲
         data(){ //仮想DOMで表示する値(初期設定)
             return {
-                isDisplay: true,
-                signal: 'blue'
+                members: ['KD','ヤニス','レブロン'],
+                books:{
+                    title: 'タイトル',
+                    author: '著者名',
+                    url: 'https://www.google.com/'
+                }
             }
         }
     })
