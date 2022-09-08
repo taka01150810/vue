@@ -20,32 +20,9 @@
     <a id="google_link">googleへのリンクです</a>
 
     <div id="app">
-        <!-- {{ }} はマスタッシュ(口ひげ)構文 と呼ばれる -->
-        {{ message }}
-        <!-- 仮想DOM --><br>
-        <a href="{{ google }}">googleへのリンク失敗例</a>
-        <a v-bind:href="google">googleへのリンク成功例1</a>
-        <a :href="google">googleへのリンク成功例2</a>
+        <div v-show="isDisplay">trueです</div><!-- trueの時表示 -->
+        <div v-show="!isDisplay">falseです</div><!-- falseの時表示 -->
 
-        <!-- オブジェクト.キー --><br>
-        <a :href="book.url">{{ book.title }}</a>
-        <!-- 
-            <input :name="" :value="" :placeholder=""> 
-        -->
-        <input v-bind="{ name:formInput.name, placeholder:formInput.placeholder }">
-        <input v-bind="formInput">
-
-        <!-- style/class -->
-        <!-- リアルDOMで書くと -->
-        <div style="color: red; font-size: 30px;">styleテスト</div><br>
-        <div class="active text-danger">classテスト</div>
-
-        <!-- キャメルケースで書く場合 -->
-        <div :style="{ fontSize: fontSize }">Vueのstyleテスト</div>
-        <!-- ケバブケースで書く場合 -->
-        <div :style="{ 'font-size': fontSize }">Vueのstyleテスト</div>
-
-        <div :class="{ active: isActive }">Vueのclassテスト</div>
     </div>
     
     <script>
@@ -53,35 +30,11 @@
         el: '#app', //仮想DOMの範囲
         data(){ //仮想DOMで表示する値(初期設定)
             return {
-                //オブジェクトは key:value という書き方
-                message: 'Vueテスト',
-                google: 'https://www.google.com/',
-                book: {
-                    title: '本のタイトル',
-                    url: 'https://www.google.com/',
-                },
-                formInput:{
-                    name: 'your_name',
-                    placeholder: 'お名前を入力してください',
-                },
-                // font-size: 20px; //ケバブケース(ハイフン(-)を使うやり方)
-                fontSize: '20px', //キャメルケース
-
-                //classのonとoff
-                isActive: true,
-                // isActive: false,
-
+                isDisplay: true
             }
         }
     })
 
-    const html = document.querySelector('html');
-    console.dir(html);//結果 html
-    console.dir(app);//結果 Vue
-
-    //直接DOM操作 HTML側(idなど)が変わればJSも変更必要
-    const googleLink = document.getElementById('google_link');
-    googleLink.href="https://www.google.com/";
 
     </script>
 </body>
