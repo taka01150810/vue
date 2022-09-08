@@ -46,6 +46,25 @@
             {{ index }} : {{ key }} : {{ value }}
         </li>
         
+        <!-- 複数のオブジェクト -->
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>タイトル</th>
+                    <th>著者</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 表示後、追加/削除/並び替えなどするならユニークキー(他と重ならないidなど)を :key="" で設定する(indexは指定しない) -->
+                <tr v-for="book in books" :key="book.id">
+                    <td>{{ book.id }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                </tr>
+            </tbody>
+        </table>
+
 
     </div>
     
@@ -55,11 +74,23 @@
         data(){ //仮想DOMで表示する値(初期設定)
             return {
                 members: ['KD','ヤニス','レブロン'],
-                books:{
-                    title: 'タイトル',
-                    author: '著者名',
-                    url: 'https://www.google.com/'
-                }
+                books:[
+                {
+                    id: 1,
+                    title: 'タイトル1',
+                    author: '著者1',
+                },
+                {
+                    id: 2,
+                    title: 'タイトル2',
+                    author: '著者2',
+                },
+                {
+                    id: 3,
+                    title: 'タイトル3',
+                    author: '著者3',
+                },
+                ]
             }
         }
     })
