@@ -14,15 +14,7 @@
 </head>
 <body>
     <div id="app">
-        {{ totalPriceMethods() }}
-        {{ totalPriceMethods() }}
-        
-    <!-- 
-        computedの場合はデータの値が変わらないと再実行されない(キャッシュする)ので
-        consoleには一回のみ表示される 
-    -->
-        {{ totalPrice }}
-        {{ totalPrice }}
+
     </div>
     
     <script>
@@ -30,65 +22,24 @@
             el: '#app', //仮想DOMの範囲
             data(){ //仮想DOMで表示する値(初期設定)
                 return {
-                    price: 1,
-                    number: 1,
-                    books:[
-                    {
-                        id: 1,
-                        title: 'タイトル1',
-                        author: '著者1',
-                    },
-                    {
-                        id: 2,
-                        title: 'タイトル2',
-                        author: '著者2',
-                    },
-                    {
-                        id: 3,
-                        title: 'タイトル3',
-                        author: '著者3',
-                    },
-                    ],
+                    test: 'あああ'
                 }
             },
-            methods: {
-                totalPriceMethods(){
-                    return this.number * this.price
-                }
+            //created...data生成のタイミング(非同期通信でデータ取得したい場合)
+            created(){
+                console.log('createdです')
+                console.log(this.$el);
+                console.log(this.test)
             },
-            computed: {
-                totalPrice: app => app.number * app.price
+            //mounted...DOM生成のタイミング(まずはmounted後で)
+            mounted(){
+                console.log('mountedです')
+                /* 結果 
+                https://gyazo.com/b45146b4af3a83ebd95a5a47cedb40fa
+                */
             },
-            watch: {
-                books:{
-                    handler(){
-                        console.log('変更されました') //結果 https://gyazo.com/cc8f7f46e039ce71e6eb8d04a0aef471
-                    },
-                    deep: true
-                }
-            },
+
         })
-
-        // thisをアロー関数の場合はappになる理由
-        console.log(this); //結果 Windowsオブジェクト
-
-        const obj = {
-            test: function(){
-                console.log(this);  //結果 オブジェクト
-            }
-        }
-
-        const objArrow = {
-            test: () =>{
-                console.log(this); //結果 Windowsオブジェクト
-            }
-        }
-
-        /*
-        リアクティブシステム
-        変更を検知して再描画
-        https://jp.vuejs.org/v2/guide/reactivity.html
-        */
     </script>
 </body>
 </html>
