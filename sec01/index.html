@@ -15,6 +15,12 @@
 <body>
 
     <button id="clickEvent" onClick="btnClicked()">クリックしてね JS version</button>
+
+    <!-- ajax -->
+    <form>
+        <button id="prevent" type="submit">送信</button>
+    </form>
+
     <div id="app">
         <button v-on:click="btnClicked">クリックしてね Vue version</button>
         <!-- 省略バージョン -->
@@ -26,7 +32,12 @@
         <!-- 引数 + イベントオブジェクト -->
         <button @click="btnClickedArgsEvent(1, $event)">引数 + Event クリックしてね Vue version</button>
 
-
+        <!-- ajax -->
+        <form>
+            <button @click.prevent="btnClickedPrevent">送信</button>
+            <button @click.stop.prevent="btnClickedPrevent_1">送信</button>
+        </form>
+        
     </div>
     
     <script>
@@ -49,6 +60,14 @@
                 btnClickedArgsEvent(int, e){
                     console.log(int, e);
                 },
+                btnClickedPrevent(e){
+                    e.preventDefault();
+                    console.log(e);//結果 読み込まれずにconsole表示できる
+                },
+                btnClickedPrevent_1(e){
+                    e.preventDefault();
+                    console.log(e);//結果 読み込まれずにconsole表示できる
+                },
             }
         })
 
@@ -59,6 +78,12 @@
         const clickEvent = document.getElementById('clickEvent');
         clickEvent.addEventListener('click', (e) => {
             console.log(e);//結果
+        })
+
+        const prevent = document.getElementById('prevent');
+        prevent.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log(e);//結果 読み込まれずにconsole表示できる
         })
 
     </script>
