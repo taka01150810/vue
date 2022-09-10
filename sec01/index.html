@@ -14,11 +14,19 @@
 </head>
 <body>
 
-    <button onClick="btnClicked()">クリックしてね JS version</button>
+    <button id="clickEvent" onClick="btnClicked()">クリックしてね JS version</button>
     <div id="app">
         <button v-on:click="btnClicked">クリックしてね Vue version</button>
         <!-- 省略バージョン -->
         <button @click="btnClicked">クリックしてね Vue version</button>
+
+        <button @click="btnClickedEvent">Event クリックしてね Vue version</button>
+        <!-- 引数を取る場合 -->
+        <button @click="btnClickedArgs(1)">引数 クリックしてね Vue version</button>
+        <!-- 引数 + イベントオブジェクト -->
+        <button @click="btnClickedArgsEvent(1, $event)">引数 + Event クリックしてね Vue version</button>
+
+
     </div>
     
     <script>
@@ -31,13 +39,28 @@
             methods:{
                 btnClicked(){
                     console.log('Vue クリックされた');
-                }
+                },
+                btnClickedEvent(e){
+                    console.log(e)
+                },
+                btnClickedArgs(int){
+                    console.log(int);
+                },
+                btnClickedArgsEvent(int, e){
+                    console.log(int, e);
+                },
             }
         })
 
         function btnClicked(){
             console.log('JS クリックされた');
         }
+
+        const clickEvent = document.getElementById('clickEvent');
+        clickEvent.addEventListener('click', (e) => {
+            console.log(e);//結果
+        })
+
     </script>
 </body>
 </html>
