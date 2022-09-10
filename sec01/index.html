@@ -13,28 +13,31 @@
     </style>
 </head>
 <body>
-    <!-- リアルDOM JSが紐付いているかわからない -->
-    <a id="google_link">googleへのリンクです</a>
 
+    <button onClick="btnClicked()">クリックしてね JS version</button>
     <div id="app">
-        <div v-cloak> {{ test1 }} </div>
-        <div> {{ test2 }} </div>
+        <button v-on:click="btnClicked">クリックしてね Vue version</button>
+        <!-- 省略バージョン -->
+        <button @click="btnClicked">クリックしてね Vue version</button>
     </div>
     
     <script>
-        setTimeout(()=>{
-            new Vue({ //Vueクラスのインスタンス化(実体) = new
-                el: '#app', //仮想DOMの範囲
-                data(){ //仮想DOMで表示する値(初期設定)
-                    return {
-                        test1 : 'V-cloakあり',
-                        test2 : 'V-cloakなし',
-                    }
+        new Vue({ //Vueクラスのインスタンス化(実体) = new
+            el: '#app', //仮想DOMの範囲
+            data(){ //仮想DOMで表示する値(初期設定)
+                return {
                 }
-            })
-        }, 3000)
+            },
+            methods:{
+                btnClicked(){
+                    console.log('Vue クリックされた');
+                }
+            }
+        })
 
-
+        function btnClicked(){
+            console.log('JS クリックされた');
+        }
     </script>
 </body>
 </html>
