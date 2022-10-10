@@ -15,11 +15,14 @@
         <br>
 
         電話番号
-        <input type="tel" v-model="contact.tel">
+        <input type="tel" v-model.number="contact.tel">
+        <!-- number ... 数字で表示 -->
         <br>
 
         メールアドレス
-        <input type="email" v-model="contact.email">
+        <input type="email" v-model.lazy.trim="contact.email">
+        <!-- lazy ... テキストボックスから外れたタイミングで表示 -->
+        <!-- trim ... 空白を除去 -->
         <br>
 
         性別
