@@ -7,13 +7,16 @@
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
     <style>
+        [v-cloak]{
+            display: none;
+        }
         .error{
             color: red;
         }
     </style>
 </head>
 <body>
-<div id="app">
+<div id="app" v-cloak>
     <p v-if="errors.length">
         <ul>
             <li class="error" v-for="error in errors">{{ error }}</li>
@@ -21,7 +24,11 @@
     </p>
     <form @submit.prevent="validate">
         氏名
-        <input type="text" v-model="contact.yourName">
+        <input type="text" v-model="yourName">
+        <!-- computedで監視している値 -->
+        <br>
+        <p :class="{error: hasError.yourName}"> {{ contact.yourName.length }}/20</p>
+        <p v-show="hasError.yourName" class="error">氏名は20文字以内で入力してください</p>
         <br>
 
         電話番号
@@ -85,7 +92,10 @@
                 attract: [],
                 caution: false,
             },
-            errors: []
+            errors: [],
+            hasError:{
+                yourName: false
+            }
         }
       },
       methods:{
@@ -109,6 +119,22 @@
             if(!this.errors.length){//エラーがなかったら
                 console.log('送信可能です')
             }
+        }
+      },
+      computed: {
+        yourName:{
+            get(){
+                return this.contact.yourName
+            },
+            set(value){
+                // console.log(value);
+                if(value.length <= 20){
+                    this.hasError.yourName = false
+                } else {
+                    this.hasError.yourName = true
+                }
+                this.contact.yourName = value
+            },
         }
       },
     })
