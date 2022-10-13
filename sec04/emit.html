@@ -15,51 +15,62 @@
       margin:0 auto;
       border: 1px blue solid;
     }
+    .grand_child{
+      width:20%;
+      margin:0 auto;
+      border: 1px green solid;
+    }
   </style>
 </head>
 <body>
   <div id="app" class="parent">
-
-    <custom-input
-    @child-event="parentValue = $event"
-    class="child"></custom-input>
-
-      {{ parentValue }}
+    
+    <child-component class="child">
+    </child-component>
+  
   </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
   
   <script>
-    let customInput = {
+    let eventBus = new Vue()
+
+    let grandChildComponent = {
       template:`<div>
-        <input type="text" v-model="childParam">
+      孫のコンポーネントです
+      <button @click="testEvent">ボタン</button>
       </div>`,
-      data(){
-        return {
-          childValue:''
+      //イベント発行
+      methods:{
+        testEvent(){
+          eventBus.$emit('eventBus-test', '孫のボタンです')
         }
-      },
-      computed:{
-        childParam:{ //監視したいプロパティ名
-          get(){
-            return this.childValue
-          },
-          set( value ){ //引数に新しい値が入る
-            this.childValue = value
-            this.$emit('child-event', value)
-          }
-        }
+      }
+    }
+
+    let childComponent = {
+      template:`<div>
+      子のコンポーネント
+      <grand-child-component class="grand_child">
+      </grand-child-component></div>`,
+      components:{
+        grandChildComponent
       }
     }
 
     let app = new Vue({
       el:'#app',
-      components:{
-        customInput
-      },
       data(){
         return {
-          parentValue:''
         }
+      },
+      components:{
+        childComponent
+      },
+      //イベント監視設定
+      mounted(){
+        eventBus.$on('eventBus-test', test => {
+          console.log(test)
+        })
       }
     })
   </script>
