@@ -4,59 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <style>
-    .parent {
-      width:800px;
-      margin:0 auto;
-      border: 1px red solid;
-    }
-    .child{
-      width:30%;
-      margin:0 auto;
-      border: 1px blue solid;
-    }
-  </style>
 </head>
 <body>
-<div id="app" class="parent">
-  <my-com class="child">
+<div id="app">
 
-    <template v-slot:header>
-      ヘッダー
+  <my-com></my-com>
+
+  <!-- <my-com>{{ member.name }}</my-com> -->
+  <!-- 中身を入れるとエラーになる -->
+
+  <my-com>
+    <template v-slot:default="player">
+      {{ player }}<br>
+      {{ player.member.name}}<br>
     </template>
-
-    <p style="color: blue">
-      mainに入ります
-    </p>
-
-    <!-- 省略版 -->
-    <template #footer>
-      フッター
-    </template>
-
-    <p style="color: red;">
-      スロットにまとめて入るので
-      ここもmainに入ります</p>
-
   </my-com>
+
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
-  
+
 <script>
   let myCom = {
     template:`<div>
-
-    <slot name="header">
-      header
-    </slot>
-
-    <slot name="default">main contents</slot>
-
-    <slot name="footer">
-      footer
-    </slot>
-
-    </div>`    
+    <slot :member="member">ここが差し替わる</slot>
+    </div>`,
+    data(){
+      return{
+        member: {
+          name:'レブロン',
+          height:206,
+          hobby:'バスケ'
+        }
+      }
+    }
   }
 
   let app = new Vue({
