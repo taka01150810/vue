@@ -19,23 +19,36 @@
 </head>
 <body>
   <div id="app" class="parent">
-<!-- @custom-event=“親のメソッド名” -->
-    <emit-test
-      @custom-event="parentMethod"
-      class="child">
-    </emit-test>
 
+    <!-- 
+      <custom-input
+      :value="parentValue"
+      @input="parentValue = $event" 
+      class="child"></custom-input> 
+    -->
+
+      <!-- v-modelで上記を書き換えた場合 -->
+      <custom-input
+      v-model="parentValue"
+      class="child"></custom-input>
+
+      {{ parentValue }}
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
   
   <script>
-    let emitTest = {
+    let customInput = {
+      props:{
+        value:{
+          type: String
+        }
+      },
       template:`<div>
-      <button @click="childMethod">子側のボタン</button>
+      <input :value="value" @input="childEvent">
       </div>`,
       methods:{
-        childMethod(){
-          this.$emit('custom-event', '子の値')
+        childEvent(e){
+          this.$emit('input', e.target.value)
         }
       }
     }
@@ -43,18 +56,15 @@
     let app = new Vue({
       el:'#app',
       components:{
-        emitTest
+        customInput
       },
       data(){
         return {
-        }
-      },
-      methods:{
-        parentMethod(e){
-          console.log(e)
+          parentValue:''
         }
       }
     })
   </script>
+  
 </body>
 </html>
