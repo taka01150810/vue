@@ -20,17 +20,9 @@
 <body>
   <div id="app" class="parent">
 
-    <!-- 
-      <custom-input
-      :value="parentValue"
-      @input="parentValue = $event" 
-      class="child"></custom-input> 
-    -->
-
-      <!-- v-modelで上記を書き換えた場合 -->
-      <custom-input
-      v-model="parentValue"
-      class="child"></custom-input>
+    <custom-input
+    @child-event="parentValue = $event"
+    class="child"></custom-input>
 
       {{ parentValue }}
   </div>
@@ -38,17 +30,23 @@
   
   <script>
     let customInput = {
-      props:{
-        value:{
-          type: String
+      template:`<div>
+        <input type="text" v-model="childParam">
+      </div>`,
+      data(){
+        return {
+          childValue:''
         }
       },
-      template:`<div>
-      <input :value="value" @input="childEvent">
-      </div>`,
-      methods:{
-        childEvent(e){
-          this.$emit('input', e.target.value)
+      computed:{
+        childParam:{ //監視したいプロパティ名
+          get(){
+            return this.childValue
+          },
+          set( value ){ //引数に新しい値が入る
+            this.childValue = value
+            this.$emit('child-event', value)
+          }
         }
       }
     }
