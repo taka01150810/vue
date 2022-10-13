@@ -16,27 +16,49 @@
       border: 1px blue solid;
     }
   </style>
-
 </head>
 <body>
-
-
 <div id="app" class="parent">
-  <child-component class="child">親の文字です</child-component>
+  <my-com class="child">
 
-  <child-component class="child">
-    <child-component class="child"></child-component>
-  </child-component>
+    <template v-slot:header>
+      ヘッダー
+    </template>
 
+    <p style="color: blue">
+      mainに入ります
+    </p>
+
+    <!-- 省略版 -->
+    <template #footer>
+      フッター
+    </template>
+
+    <p style="color: red;">
+      スロットにまとめて入るので
+      ここもmainに入ります</p>
+
+  </my-com>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
   
 <script>
-  let childComponent = {
+  let myCom = {
     template:`<div>
-      レブロン<slot>ヨキッチ</slot>ヤニス</div>`
+
+    <slot name="header">
+      header
+    </slot>
+
+    <slot name="default">main contents</slot>
+
+    <slot name="footer">
+      footer
+    </slot>
+
+    </div>`    
   }
-  
+
   let app = new Vue({
     el:'#app',
     data(){
@@ -44,10 +66,9 @@
       }
     },
     components:{
-      childComponent
+      myCom
     }
   })
 </script>
-  
 </body>
 </html>
