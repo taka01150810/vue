@@ -9,11 +9,24 @@
   <div id="app">
     <button @click="getDogImage">画像を取得</button>
     <img :src="dogImage">
+    <input type="text" v-model="watchTest">
   </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
 
   <script>
+    let obj = {
+        a: 'テスト'
+    }
+    
+    obj.b = 'あああ'
+    obj.c = test
+
+    function test(){
+        console.log('テスト')
+        //結果 https://gyazo.com/87964e2f159a0c9fefab85452dc87d96
+    }
+
     const url = 'https://dog.ceo/api/breeds/image/random'
     const options = {
       method: 'get'
@@ -24,6 +37,7 @@
       data(){
         return {
           dogImage: '',
+          watchTest: '',
         }
       },
       methods:{
@@ -34,9 +48,15 @@
           this.dogImage = response.message
         }
       },
+      watch:{
+        watchTest(){
+          this.watchDogImage()
+        }
+      },
       //読み込んだタイミングで表示
       created(){
         this.getDogImage()
+        this.watchDogImage = _.debounce(this.getDogImage, 1000)
       }
     })
   </script>
