@@ -6,7 +6,8 @@
       <!-- <router-link to="/about" tag="button">About</router-link> -->
       <!-- クラス名設定 -->
       <router-link to="/about" exact-active-class="test">About</router-link> |
-      <router-link to="/book">BookList</router-link>
+      <router-link to="/book">BookList</router-link> |
+      <router-link to="/item/1">Item</router-link>
     </nav>
     <router-view/>
   </div>

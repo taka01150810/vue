@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import BookList from '../views/Booklist.vue'
 import BookDetail from '@/components/BookDetail.vue'
-
+import Item from '../views/Item.vue'
 
 Vue.use(VueRouter)
 
@@ -35,7 +35,12 @@ const routes = [
       title: route.params.title,
       content: route.params.content,
     })
-  }
+  },
+  {
+    path: '/item/:id',
+    name: 'Item',
+    component: Item,
+  },
 ]
 
 const router = new VueRouter({
