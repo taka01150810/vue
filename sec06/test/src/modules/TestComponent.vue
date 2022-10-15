@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="red-b">
     テストです
     {{ testData }}
   </div>
@@ -16,6 +16,11 @@ export default {
 }
 </script>
 
-<style>
+<!-- scoped = 有効範囲を狭めることでこのクラス内だけで使えるCSSを作成できる-->
+<style scoped> 
+
+.red-b{
+  border:1px red solid;
+}
 
 </style>
