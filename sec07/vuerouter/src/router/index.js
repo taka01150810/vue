@@ -48,6 +48,9 @@ const routes = [
     path: '/item/:id',
     name: 'Item',
     component: Item,
+    // beforeEnter: (to, from, next)=>{
+
+    // }
   },
   {
     path: '/user',
@@ -75,6 +78,13 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next)=>{
+  console.log(to)
+  console.log(from)
+  next() //移動する 
+  // next(false) //移動しない
 })
 
 export default router
