@@ -7,13 +7,20 @@
       <!-- クラス名設定 -->
       <router-link to="/about" exact-active-class="test">About</router-link> |
       <router-link to="/book">BookList</router-link> |
-      <router-link to="/item/1">Item</router-link>
+      <router-link to="/item/1">Item</router-link> |
+      <router-link to="/user/profile">User</router-link>
     </nav>
-    <router-view/>
+    <div class="blue-b">
+      <router-view/>
+    </div>
   </div>
 </template>
 
 <style>
+.blue-b{
+  border: 1px blue solid;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
