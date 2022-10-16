@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <v-container>
-        
+  <div> 
         <v-row cols="6">
             <v-text-field
             label="本のタイトルを検索"
@@ -50,8 +48,6 @@
                 </v-card>
             </v-col>
         </v-row>
-
-    </v-container>
   </div>
 </template>
 
@@ -66,6 +62,9 @@ export default {
     }
     },
     methods:{
+        addBookList(index){
+            this.$emit('add-book-list', this.searchResults[index])
+        },
     async search(keyword){
         this.searchResults = []
         // クエリーストリングを作成
