@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import BookList from '../views/Booklist.vue'
 import BookDetail from '@/components/BookDetail.vue'
 import Item from '../views/Item.vue'
+import NotFound from '@/components/NotFound.vue'
 
 Vue.use(VueRouter)
 
@@ -41,6 +42,12 @@ const routes = [
     name: 'Item',
     component: Item,
   },
+  {
+    path: '*', // 上記のパスにマッチしないもの全て
+    // redirect: '/',
+    name: 'NotFound',
+    component: NotFound,
+  }
 ]
 
 const router = new VueRouter({
