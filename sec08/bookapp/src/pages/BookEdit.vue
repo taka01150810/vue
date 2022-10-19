@@ -1,10 +1,16 @@
 <template>
-  <div>BookEditです</div>
+  <div>]
+    BookEditです
+    {{ books }}
+  </div>
 </template>
 
 <script>
 export default {
-
+  name: 'BookEdit',
+  props:{
+    books:Array
+  }
 }
 </script>
 
