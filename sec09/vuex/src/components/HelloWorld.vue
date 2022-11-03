@@ -13,14 +13,23 @@ export default {
     msg: String
   },
   methods: {
-    //分かりにくいので名前変更
+    // //分かりにくいので名前変更
+    // increment(){
+    //   //mutationsの呼び出し
+    //   this.$store.commit('increment')
+    // },
+    // addCount(){
+    //   this.$store.commit('addCount', {
+    //     value: 10
+    //   })
+    // }
+    //actionを呼び出す
     increment(){
-      //mutationsの呼び出し
-      this.$store.commit('increment')
+      this.$store.dispatch('incrementAction')
     },
     addCount(){
-      this.$store.commit('addCount', {
-        value: 10
+      this.$store.dispatch('addCountAction', {
+        value : 10
       })
     }
   }

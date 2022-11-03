@@ -20,6 +20,21 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    //書き方は2パターンある
+    /*
+    incrementAction( context ){
+      context.commit('increment')
+    },
+    incrementAction( {commit} ){
+      commit('increment')
+    }
+    */
+    incrementAction( {commit} ){
+      commit('increment')
+    },
+    addCountAction( {commit}, payload){
+      commit('addCount', payload)
+    }
   },
   modules: {
   }
