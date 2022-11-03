@@ -1,7 +1,8 @@
 <template>
   <!-- 孫ページ -->
   <div>
-    <button @click="addCount">+</button>
+    <button @click="increment">+</button>
+    <button @click="addCount">+10</button>
   </div>
 </template>
 
@@ -12,9 +13,15 @@ export default {
     msg: String
   },
   methods: {
-    addCount(){
+    //分かりにくいので名前変更
+    increment(){
       //mutationsの呼び出し
       this.$store.commit('increment')
+    },
+    addCount(){
+      this.$store.commit('addCount', {
+        value: 10
+      })
     }
   }
 }

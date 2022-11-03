@@ -14,6 +14,9 @@ export default new Vuex.Store({
   mutations: {
     increment( state ){ //statue引数は約束事
       state.count++
+    },
+    addCount( state, payload ){//第2引数はオブジェクト
+      state.count += payload.value
     }
   },
   actions: {
