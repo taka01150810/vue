@@ -1,12 +1,15 @@
 <template>
   <!-- 孫ページ -->
   <div>
-    <button @click="increment">+</button>
+    <!-- <button @click="increment">+</button> -->
+    <button @click="incrementAction">マップアクションバージョン + </button>
     <button @click="addCount">+10</button>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'HelloWorld',
   props: {
@@ -24,14 +27,20 @@ export default {
     //   })
     // }
     //actionを呼び出す
-    increment(){
-      this.$store.dispatch('incrementAction')
-    },
+    ...mapActions(['incrementAction', 'addCountAction']),
     addCount(){
-      this.$store.dispatch('addCountAction', {
+      this.addCountAction({
         value : 10
       })
     }
+    // increment(){
+    //   this.$store.dispatch('incrementAction')
+    // },
+    // addCount(){
+    //   this.$store.dispatch('addCountAction', {
+    //     value : 10
+    //   })
+    // },
   }
 }
 </script>
