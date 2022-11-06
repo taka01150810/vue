@@ -11,11 +11,12 @@
     <button @click="btnClick">クリックしてね</button>
     <p>computedです: {{ totalPrice }}</p>
     <div>watchです: <input v-model="search">{{ search }}</div>
+    <div>watchEffectです: <input v-model="searchEffect">{{ searchEffect }}</div> 
   </div>
 </template>
 
 <script>
-import { ref, reactive, toRefs, computed, watch } from 'vue'
+import { ref, reactive, toRefs, computed, watch, watchEffect } from 'vue'
 
 export default {
     data(){},
@@ -70,6 +71,7 @@ export default {
             return item.price * item.number //必ずreturnが必要
         })
 
+        //watchは入力されたタイミングで実行
         const search = ref('')
         watch(search, (newValue, prevValue)=>{
             console.log(`watch: ${search.value}`)
@@ -77,6 +79,12 @@ export default {
             console.log(`new: ${newValue}`)
             //変更前
             console.log(`prev: ${prevValue}`)
+        })
+
+        //watchEffectは画面が読み込まれたタイミングで実行
+        const searchEffect = ref('')
+        watchEffect( () => { //引数なしのコールバック関数
+            console.log(`watchEffect: ${searchEffect.value}`)
         })
 
         return {
@@ -89,7 +97,8 @@ export default {
             btnClick,
             item,
             totalPrice,
-            search
+            search,
+            searchEffect
         } 
         //returnに書いた変数・関数をtemplate内で扱える
         //しかしリアクティブではない
