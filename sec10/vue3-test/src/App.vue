@@ -5,14 +5,44 @@
     <router-link to="/children">Children</router-link> |
     <router-link to="/teleport-test">Teleport</router-link> |
     <router-link to="/composition-test">Composition</router-link> |
+    <router-link to="/props-emit-test">PropsEmitTest</router-link> |
   </nav>
-  <router-view/>
+  <router-view :setupBooks="setupBooks" :dataBooks="dataBooks" />
 </template>
 
 <script>
+import { reactive } from "@vue/reactivity"
+
 export default({
+  setup(){
+    const setupBooks = reactive([
+      {
+        title: 'setupタイトル1',
+        author: 'setup著者1'
+      },
+      {
+        title: 'setupタイトル2',
+        author: 'setup著者2'
+      }
+    ])
+
+    return{
+      setupBooks
+    }
+  },
   data(){
-    return{}
+    return{
+      dataBooks:[
+        {
+          title: 'Dateタイトル1',
+          author: 'data著者1'
+        },
+        {
+          title: 'Dateタイトル2',
+          author: 'data著者2'
+        }
+      ]
+    }
   },
   provide(){
     return {
