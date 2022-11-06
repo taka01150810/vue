@@ -11,7 +11,7 @@ import GrandChildren from '@/components/GrandChildren'
 export default {
     components: {
         GrandChildren
-    }
+    },
 }
 </script>
 
