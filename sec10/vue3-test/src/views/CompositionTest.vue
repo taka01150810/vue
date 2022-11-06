@@ -8,6 +8,7 @@
     <p>reactive : {{ book.author[0] }}</p>
     <p>reactiveToRefsです : {{ titleRef }}</p>
     <p>reactiveToRefsです : {{ authorRef[1] }}</p>
+    <button @click="btnClick">クリックしてね</button>
   </div>
 </template>
 
@@ -48,14 +49,24 @@ export default {
             titleRef : 'ネッツ',
             authorRef : ['渡辺', 'KD'],
         })
-        
+
+        // JSは変数に関数を含めることができる
+        const btnClick = (e) => {
+            console.log('クリックしたよ')
+            // Setup関数内の変数もそのまま指定可能(this不要) 
+            console.log(book.title)
+            // 引数にeでイベント取得
+            console.log(e)
+        }
+
         return {
             name,
             age,
             nameRef,
             book,
             // ...でオブジェクトを展開
-            ...toRefs(bookToRefs)
+            ...toRefs(bookToRefs),
+            btnClick
         } 
         //returnに書いた変数・関数をtemplate内で扱える
         //しかしリアクティブではない
