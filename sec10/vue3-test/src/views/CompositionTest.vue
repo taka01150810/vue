@@ -16,10 +16,11 @@
 </template>
 
 <script>
-import { ref, reactive, toRefs, computed, watch, watchEffect } from 'vue'
+import { ref, reactive, toRefs, computed, watch, watchEffect, onMounted } from 'vue'
 
 export default {
     data(){},
+    //setupはbeforeCreateとcreatedの間のライフサイクルで実行される 
     setup(){
         let name = '大谷'
         const age = 30
@@ -87,6 +88,12 @@ export default {
             console.log(`watchEffect: ${searchEffect.value}`)
         })
 
+        //setupで少しタイミングを遅らせて実行させたい場合
+        onMounted(()=> {
+            console.log('onMountedです')
+            //結果 createdです より後に onMountedです がコンソールに表示
+        })
+
         return {
             name,
             age,
@@ -98,7 +105,8 @@ export default {
             item,
             totalPrice,
             search,
-            searchEffect
+            searchEffect,
+            onMounted
         } 
         //returnに書いた変数・関数をtemplate内で扱える
         //しかしリアクティブではない
