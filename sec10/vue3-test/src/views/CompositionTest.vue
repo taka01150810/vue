@@ -6,11 +6,13 @@
     <p>{{ nameRef }}</p>
     <p>reactive : {{ book.title }}</p>
     <p>reactive : {{ book.author[0] }}</p>
+    <p>reactiveToRefsです : {{ titleRef }}</p>
+    <p>reactiveToRefsです : {{ authorRef[1] }}</p>
   </div>
 </template>
 
 <script>
-import { ref, reactive } from 'vue'
+import { ref, reactive, toRefs } from 'vue'
 
 export default {
     data(){},
@@ -41,12 +43,19 @@ export default {
         book.title などで表示できる
         */
         console.log(book.title);
+
+        const bookToRefs = reactive({
+            titleRef : 'ネッツ',
+            authorRef : ['渡辺', 'KD'],
+        })
         
         return {
             name,
             age,
             nameRef,
-            book
+            book,
+            // ...でオブジェクトを展開
+            ...toRefs(bookToRefs)
         } 
         //returnに書いた変数・関数をtemplate内で扱える
         //しかしリアクティブではない
