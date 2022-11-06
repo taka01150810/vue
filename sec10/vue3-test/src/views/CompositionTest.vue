@@ -10,11 +10,12 @@
     <p>reactiveToRefsです : {{ authorRef[1] }}</p>
     <button @click="btnClick">クリックしてね</button>
     <p>computedです: {{ totalPrice }}</p>
+    <div>watchです: <input v-model="search">{{ search }}</div>
   </div>
 </template>
 
 <script>
-import { ref, reactive, toRefs, computed } from 'vue'
+import { ref, reactive, toRefs, computed, watch } from 'vue'
 
 export default {
     data(){},
@@ -69,6 +70,15 @@ export default {
             return item.price * item.number //必ずreturnが必要
         })
 
+        const search = ref('')
+        watch(search, (newValue, prevValue)=>{
+            console.log(`watch: ${search.value}`)
+            //変更後
+            console.log(`new: ${newValue}`)
+            //変更前
+            console.log(`prev: ${prevValue}`)
+        })
+
         return {
             name,
             age,
@@ -79,6 +89,7 @@ export default {
             btnClick,
             item,
             totalPrice,
+            search
         } 
         //returnに書いた変数・関数をtemplate内で扱える
         //しかしリアクティブではない
