@@ -9,11 +9,12 @@
     <p>reactiveToRefsです : {{ titleRef }}</p>
     <p>reactiveToRefsです : {{ authorRef[1] }}</p>
     <button @click="btnClick">クリックしてね</button>
+    <p>computedです: {{ totalPrice }}</p>
   </div>
 </template>
 
 <script>
-import { ref, reactive, toRefs } from 'vue'
+import { ref, reactive, toRefs, computed } from 'vue'
 
 export default {
     data(){},
@@ -59,6 +60,15 @@ export default {
             console.log(e)
         }
 
+        const item = reactive({
+            price: 100,
+            number: 3
+        })
+
+        const totalPrice = computed(()=>{
+            return item.price * item.number //必ずreturnが必要
+        })
+
         return {
             name,
             age,
@@ -66,7 +76,9 @@ export default {
             book,
             // ...でオブジェクトを展開
             ...toRefs(bookToRefs),
-            btnClick
+            btnClick,
+            item,
+            totalPrice,
         } 
         //returnに書いた変数・関数をtemplate内で扱える
         //しかしリアクティブではない
