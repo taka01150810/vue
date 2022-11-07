@@ -8,7 +8,7 @@
 
 <script>
 //setup内でthisは使えないので専用の合成関数を読み込む
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter, useRoute, onBeforeRouteLeave } from 'vue-router'
 
 export default{
     setup(){
@@ -21,6 +21,12 @@ export default{
         const checkRoutePath = () => {
             console.log(route.path)
         }
+
+        onBeforeRouteLeave((to, from)=>{
+            console.log(`to: ${to}`)
+            console.log(`from: ${from}`)
+        })
+
         return { goHome, checkRoutePath }
     }
 }
