@@ -3,6 +3,13 @@ module.exports = {
   env: {
     node: true
   },
+  //ESLintにひっかかるので追加対応
+  globals : {
+    "defineProps" : "readonly",
+    "defineEmits" : "readonly",
+    "defineExpose" : "readonly",
+    "withDefaults" : "readonly",
+  }, 
   'extends': [
     'plugin:vue/vue3-essential',
     'eslint:recommended'
