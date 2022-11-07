@@ -11,22 +11,7 @@
 
 <script>
 import { reactive } from '@vue/reactivity'
-import { computed } from '@vue/runtime-core'
-
-//合成関数
-const useCounter = item => {
-    const increment = () => {
-        item.amount++
-    }
-    const decrement = () => {
-        item.amount--
-    }
-    const totalPrice = computed(()=>{
-        return item.price * item.amount
-    })
-
-    return{ increment, decrement, totalPrice }
-}
+import useCounter from '@/composables/useCounter'
 
 export default {
     setup(){
